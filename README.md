@@ -1,5 +1,5 @@
 # BlogFeed-v2
-A multi-user blogging application built with MERN (MongoDB, Express, React, Node) stack with cloud-based image and video management service cloudinary.
+A multi-user blogging application built using MERN (MongoDB, Express, React, Node) stack with cloud-based image and video management service cloudinary.
 
 # To run:
 
