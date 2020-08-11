@@ -181,9 +181,8 @@ function Profile() {
           borderRadius: "0 0 30px 30px",
           boxShadow: "5px 7px 5px grey"
       }}>
-            <img style={{width:"250px",height:"250px",borderRadius:"125px"}}
-        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"
-        />
+            <img class="neu" style={{width:"145px",height:"145px",borderRadius:"50%"}}
+        src = {require("../assets/logo3.PNG")}/>
         <br></br><br></br>
         <h3>{myname}</h3>
        
