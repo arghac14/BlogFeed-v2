@@ -23,8 +23,8 @@ function Signup() {
                 passWord
             })
         }).then(res=>res.json())
-        .then(result=>{
-            console.log(result)
+        .then(data=>{
+            console.log(data)
             M.toast({html:"Account created!",classes:"#43a047 green darken-1"})
             history.push("/signin")
         })
@@ -39,7 +39,7 @@ function Signup() {
              
             <div className="neu card auth-card">
                     <h2 style={{color: "#ed6663"}}>BlogFeed</h2>
-                    <form>
+                    
                     <input required type="text" placeholder="Full Name" onChange={(e)=>setfullName(e.target.value)}/>
                     <input required type="text" placeholder="Username" onChange={(e)=>setuserName(e.target.value)}/>
                     <input required type="email" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/>
@@ -48,7 +48,7 @@ function Signup() {
                     <br/><br></br>
                     <span>Already have an account? <a href="/signin">Sign In</a></span>
                     <br/>
-                    </form>
+                    
                     
             </div>
         </div>

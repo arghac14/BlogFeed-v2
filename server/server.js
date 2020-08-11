@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var cors = require('cors')
 const mongoose = require('mongoose');
-const {MONGO_URI, JWT} = require('./db');
+const {MONGO_URI, JWT} = require('./config/db');
 const jwt = require('jsonwebtoken');
 
 
@@ -217,6 +217,14 @@ app.delete('/deletepost/:postId', requiredAuth,(req, res)=>{
         }
     })
 })
+
+if(process.env.NODE_ENV=="production"){
+    app.use(express.static('client/build'))
+    const path = require('path')
+    app.get("*", (req, res)=>{
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT)
