@@ -15,6 +15,7 @@ $npm install
 $npm start
 
 ```
+# Snapshots:
 ![](https://github.com/arghac14/BlogFeed-v2/blob/master/snapshots/Capture1.PNG)
 ![](https://github.com/arghac14/BlogFeed-v2/blob/master/snapshots/Capture2.PNG)
 ![](https://github.com/arghac14/BlogFeed-v2/blob/master/snapshots/Capture3.PNG)
