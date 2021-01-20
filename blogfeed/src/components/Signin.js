@@ -10,7 +10,7 @@ function Signin() {
     const [passWord, setpassWord] = useState("")
     const history = useHistory()
     const getData = ()=>{
-        fetch("http://localhost:5000/signin",{
+        fetch("/signin",{
             method: "post",
             headers:{
                 "Content-Type":"application/json"

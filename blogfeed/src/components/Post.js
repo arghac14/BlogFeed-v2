@@ -11,7 +11,7 @@ function Post() {
     const {state, dispatch} = useContext(userContext)
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/post/${postId}`,{
+        fetch(`/post/${postId}`,{
           method: "GET",
           headers:{
               "Content-Type":"application/json",

@@ -6,7 +6,7 @@ import M from 'materialize-css';
 function Feed() {
     const [data, setData] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/',{
+        fetch('/',{
         headers:{
             "Authorization": "token "+ localStorage.getItem("jwt"),
         }

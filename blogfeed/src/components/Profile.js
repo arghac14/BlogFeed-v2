@@ -10,7 +10,7 @@ function Profile() {
   const {state, dispatch} = useContext(userContext)
   //  var id = JSON.parse(localStorage.getItem('user'))._id
     useEffect(()=>{
-      fetch('http://localhost:5000/profile',{
+      fetch('/profile',{
         method: "post",
         headers:{
             "Content-Type":"application/json",

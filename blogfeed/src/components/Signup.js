@@ -11,7 +11,7 @@ function Signup() {
     const history = useHistory()
     const postData = (e)=>{
         
-        fetch("http://localhost:5000/signup",{
+        fetch("/signup",{
             method: "post",
             headers:{
                 "Content-Type":"application/json"
