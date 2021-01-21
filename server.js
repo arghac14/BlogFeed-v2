@@ -200,7 +200,7 @@ app.post('/signup', (req, res)=>{
             error: "Enter a valid email!"
         });
     }
-    if(req.body.userName.passWord.length < 6){
+    if(req.body.passWord.length < 6){
         return res.status(422).json({
             error: "Password should be atleast 6 characters long!"
         });
