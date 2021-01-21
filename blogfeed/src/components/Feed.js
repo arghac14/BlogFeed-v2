@@ -1,15 +1,24 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
+import {userContext} from '../App';
 import Navbar from './Navbar';
 import M from 'materialize-css';
 
 function Feed() {
+    //console.log("Feed")
     const [data, setData] = useState([])
+    const history = useHistory()
+    const {state, dispatch} = useContext(userContext)
+    const [mypost, setPost] = useState([])
+
     useEffect(()=>{
-        fetch('/',{
-        headers:{
-            "Authorization": "token "+ localStorage.getItem("jwt"),
-        }
+        fetch("/feed",{
+            method: "GET",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization": "token "+ localStorage.getItem("jwt"),
+            }
     })
     .then(res=>res.json())
     .then(result=>{

@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 import M from 'materialize-css';
 
 function AddPost() {
+    console.log("Addpost")
     const history = useHistory();
     var user = JSON.parse(localStorage.getItem("user"));
     if(!user){
@@ -45,7 +46,8 @@ function AddPost() {
     },[url]) 
     
     const addPost =(e)=>{
-        M.toast({html: "This may take few seconds..", classes:"yellow"})
+        
+        M.toast({html: "Please add all the fields", classes:"#c62828 red darken-3"})
         //console.log(image)
         var formdata = new FormData();
 
@@ -65,9 +67,11 @@ function AddPost() {
         .then(data=>{
             console.log(data)
             setUrl(data.url)
+            
         })
         .catch(err=>{
             M.Toast({html: "Missing required parameter!",classes:"#c62828 red darken-3"})
+            console.log("HIHI")
             console.log(err)
         })
 
@@ -81,8 +85,8 @@ return (
                 <h2 style={{color: "#ed6663"}}>Create a post</h2>
                 <input required type="text" onChange={(e)=>setTitle(e.target.value)} placeholder="Title" maxLength = "30"/>
                 <input required type="text" onChange={(e)=>setTag(e.target.value)} placeholder="Tagline" maxLength = "90"/><br></br>
-                <input type="file" onChange={(e)=>setImage(e.target.files[0])} placeholder="Add cover image: "></input><br></br>
-                <textarea className="btn-neu" maxLength="4000" onChange={(e)=>setBody(e.target.value)} placeholder="Share your story here.." style={{height: "500px", fontSize:"20px"}} required maxlength = "5000" rows="100" cols="100"></textarea>
+                <input required type="file" onChange={(e)=>setImage(e.target.files[0])} placeholder="Add cover image: "></input><br></br>
+                <textarea required className="btn-neu" maxLength="4000" onChange={(e)=>setBody(e.target.value)} placeholder="Share your story here.." style={{height: "500px", fontSize:"20px"}} maxLength = "5000" rows="100" cols="100"></textarea>
                 <br/><br/><button onClick={()=>addPost()} style={{backgroundColor: "#ed6663", color:"whitesmoke"}} className="btn-neu btn waves-effect waves-light">Submit</button>
                 <br/>
         </div>

@@ -34,10 +34,10 @@ const Navbar = ()=> {
     return (
         <div>
             <header class="header">
-  <span class="logo"><img style={{width:"45px",height:"45px",borderRadius:"50%"}}
+  <span className="logo"><img style={{width:"45px",height:"45px",borderRadius:"50%"}}
         src = {require("../assets/logo1.PNG")}/></span>
-  <input class="menu-btn" type="checkbox" id="menu-btn" />
-  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <input className="menu-btn" type="checkbox" id="menu-btn" />
+  <label className="menu-icon" for="menu-btn"><span className="navicon"></span></label>
   <ul class="menu">
    {renderList()}
   </ul>

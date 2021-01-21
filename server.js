@@ -45,10 +45,11 @@ const middleWare = (req, res, next) => {
     next();
 }
 
-app.get('/', (req, res)=>{
+app.get('/feed', (req, res)=>{
     console.log("HOME!");
+   // console.log(req,res)
     Posts.find()
-    .populate('author', "_id name")
+    .populate("author", "_id name")
     .sort('-createdAt')
     .then(posts=>{
         res.json(posts)
@@ -56,9 +57,21 @@ app.get('/', (req, res)=>{
     })
 });
 
+app.get('/post/:id', (req, res)=>{
+    console.log(req.params.id) 
+    console.log("Post");
+    Posts.findOne({_id: req.params.id })
+        .populate("author","_id name")
+        .then(post=>{
+           console.log(post)
+            res.json(post)
+        })
+});
+
 app.get('/addpost', requiredAuth, addPost)
 
 app.post('/addpost', requiredAuth, (req, res)=>{
+    console.log("Addpost-server")
     const {title, tag, body, image} = req.body;
     console.log(req.body)
     var post = new Posts({
@@ -106,24 +119,8 @@ app.get('/user/:id', (req, res)=>{
 });
 
 app.get('/post/:id', (req, res)=>{
-    console.log(req.params.id)
-    // Users.findOne({_id: req.params.id})
-    // .select("-password")
-    // .then(user=>{
-    //     Posts.find({author:req.params.id})
-    //     .populate("author", "_id name")
-    //     .exec((err,posts)=>{
-    //         if(err){
-    //             return res.status(422).json({error: err})
-    //         }
-    //        console.log("User and posts:",{user,posts})
-        
-    //         res.json({user})
-    //     })
-    // }).catch(err=>{
-    //     return res.status(404).json({error: "User not found"})
-    // })
-    
+    console.log(req.params.id) 
+    console.log("Post");
     Posts.findOne({_id: req.params.id })
         .populate("author","_id name")
         .then(post=>{
@@ -132,7 +129,7 @@ app.get('/post/:id', (req, res)=>{
         })
 });
 app.post('/profile', (req, res)=>{
-    console.log("My Posts!");
+    console.log("My Poss!");
     //console.log(req.body.id)
     //console.log(req.params.username)
         Posts.find({author: req.body.id })
@@ -154,24 +151,66 @@ app.get('/signin', middleWare, (req, res)=>{
 });
 
 app.post('/signin', (req, res)=>{
-  //  console.log(req.body)
+   console.log(req.body.userName.length)
+//    if(req.body.userName.length==0 || req.body.passWord.length==0 ){
+//         return res.status(422).json({
+//             error: "Please Enter all credentials!"
+//         });
+//    }
+
     Users.findOne({ username: req.body.userName, password: req.body.passWord },  function(err, users) {
-        if (err) throw err;
+        //if (err) throw err;
         console.log(users);
+
+
+
         if(users){
             const token = jwt.sign({_id:users._id},JWT)
             const {_id,name,username,email} = users
             res.json({token,user:{_id,name,username,email}})
             console.log('Go to landing page with token:', token);
         }
+        
+        else if(req.body.userName.length==0 || req.body.passWord.length==0 ){
+            return res.status(422).json({
+                error: "Please Enter all credentials!"
+            });
+         }
+    
         else{
-            console.log("User doesn't exist")
+           // throw err;
+            console.log("User doesn't exist");
+            return res.status(422).json({
+                error: "Invalid credentials!"
+            });  
         }
     });
 })
 
 app.post('/signup', (req, res)=>{
     console.log(req.body);
+    
+    if(req.body.fullName.length ==0 || req.body.userName.length==0 || req.body.email.length==0 || req.body.passWord.length==0){
+        return res.status(422).json({
+            error: "Please Enter all credentials!"
+        });
+    }
+    if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(req.body.email)){
+        return res.status(422).json({
+            error: "Enter a valid email!"
+        });
+    }
+    if(req.body.userName.passWord.length < 6){
+        return res.status(422).json({
+            error: "Password should be atleast 6 characters long!"
+        });
+    }
+    if(req.body.userName.length > 20 || req.body.userName.length < 2){
+        return res.status(422).json({
+            error: "User name must be within 2 to 10 characters."
+        });
+    }
+
     var user = new Users({
         name: req.body.fullName,
         username: req.body.userName,
@@ -181,18 +220,22 @@ app.post('/signup', (req, res)=>{
     
     
     Users.findOne({ username: req.body.userName, password: req.body.passWord },  function(err, users) {
-        if (err) throw err;
+       // if (err) throw err;
         console.log(users);
-        if(!users){
+        if(users){
+            return res.status(422).json({
+                error: "User already exists!"
+            });
+            
+        }
+       
+        else {
             user.save(function(err) {
                 if (err) throw err;
                 console.log('User saved successfully!');
                 res.json({data:users, message:"success"})
                 //const token = jwt.sign({_id: users._id}, JWT)
             });
-        }
-        else{
-            console.log("User already exists!")
         }
     });
 })

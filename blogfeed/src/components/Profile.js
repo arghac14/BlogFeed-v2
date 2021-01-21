@@ -34,7 +34,7 @@ function Profile() {
     },[])
 
    const deletePost=(postId)=>{
-      fetch(`http://localhost:5000/deletepost/${postId}`,{
+      fetch(`/deletepost/${postId}`,{
         method: "delete",
         headers: {
           "Authorization": "token "+localStorage.getItem("jwt")
