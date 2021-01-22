@@ -14,7 +14,7 @@ function User() {
   //  var id = JSON.parse(localStorage.getItem('user'))._id
     useEffect(()=>{
       fetch(`/user/${userId}`,{
-        method: "GET",
+        method: "POST",
         headers:{
             "Content-Type":"application/json",
             "Authorization": "token " + localStorage.getItem("jwt")

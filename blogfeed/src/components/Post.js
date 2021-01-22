@@ -12,7 +12,7 @@ function Post() {
 
     useEffect(()=>{
         fetch(`/post/${postId}`,{
-          method: "post",
+          method: "GET",
           headers:{
               "Content-Type":"application/json",
               "Authorization": "token " + localStorage.getItem("jwt")
