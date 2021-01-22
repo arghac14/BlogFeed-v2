@@ -57,9 +57,9 @@ app.get('/feed', (req, res)=>{
     })
 });
 
-
 app.get('/user/:id', (req, res)=>{
     console.log("User's feed")
+    console.log(req.params)
     Posts.find({author: req.params.id })
         .populate("author","_id name")
         .sort('-createdAt')
@@ -127,7 +127,7 @@ app.get('/signin', middleWare, (req, res)=>{
 });
 
 app.post('/signin', (req, res)=>{
-   console.log(req.body.userName.length)
+   console.log(req.body)
 //    if(req.body.userName.length==0 || req.body.passWord.length==0 ){
 //         return res.status(422).json({
 //             error: "Please Enter all credentials!"
