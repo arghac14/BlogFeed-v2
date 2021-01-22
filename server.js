@@ -57,6 +57,30 @@ app.get('/feed', (req, res)=>{
     })
 });
 
+
+app.get('/user/:id', (req, res)=>{
+    console.log("User's feed")
+    Posts.find({author: req.params.id })
+        .populate("author","_id name")
+        .sort('-createdAt')
+        .then(post=>{
+           console.log(post)
+            res.json({post, name: post[0].author.name})
+        })
+});
+
+app.get('/post/:id', (req, res)=>{
+    console.log(req.params.id) 
+    console.log("Post: '/post/:id'");
+    Posts.findOne({_id: req.params.id })
+        .populate("author","_id name")
+        .then(post=>{
+           console.log(post)
+            res.json(post)
+        })
+});
+
+
 app.get('/addpost', requiredAuth, addPost)
 
 app.post('/addpost', requiredAuth, (req, res)=>{
@@ -79,45 +103,7 @@ app.post('/addpost', requiredAuth, (req, res)=>{
     })
 })
 
-app.get('/user/:id', (req, res)=>{
-    //console.log(req.params.id)
-    console.log("User's feed")
-    // Users.findOne({_id: req.params.id})
-    // .select("-password")
-    // .then(user=>{
-    //     Posts.find({author:req.params.id})
-    //     .populate("author", "_id name")
-    //     .exec((err,posts)=>{
-    //         if(err){
-    //             return res.status(422).json({error: err})
-    //         }
-    //        console.log("User and posts:",{user,posts})
-        
-    //         res.json({user})
-    //     })
-    // }).catch(err=>{
-    //     return res.status(404).json({error: "User not found"})
-    // })
-    
-    Posts.find({author: req.params.id })
-        .populate("author","_id name")
-        .sort('-createdAt')
-        .then(post=>{
-           console.log(post)
-            res.json({post, name: post[0].author.name})
-        })
-});
 
-app.get('/post/:id', (req, res)=>{
-    console.log(req.params.id) 
-    console.log("Post: '/post/:id'");
-    Posts.findOne({_id: req.params.id })
-        .populate("author","_id name")
-        .then(post=>{
-           console.log(post)
-            res.json(post)
-        })
-});
 app.post('/profile', (req, res)=>{
     console.log("My Poss! '/profile'");
     //console.log(req.body.id)

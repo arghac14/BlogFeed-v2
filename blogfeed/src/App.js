@@ -18,15 +18,16 @@ export const userContext = createContext()
 const Routing=()=>{
   const history = useHistory()
   const {state, dispatch} = useContext(userContext)
+
   useEffect(()=>{
     var user = JSON.parse(localStorage.getItem("user"));
     //console.log(user)
     if(user){
       dispatch({type:"USER", payload: user})
-      //history.push('/')
+      history.push('/')
     }
     else{
-      //history.push('/signin')
+      history.push('/signin')
     }
   },[])
 
