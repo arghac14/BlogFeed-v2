@@ -137,7 +137,7 @@ function Profile() {
         method: "GET",
         headers:{
             "Content-Type":"application/json",
-            "Authorization": "token " + localStorage.getItem("jwt")
+            //"Authorization": "token " + localStorage.getItem("jwt")
         },
       })
       .then(res=>res.json())
