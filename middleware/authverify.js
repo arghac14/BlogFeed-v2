@@ -21,6 +21,7 @@ module.exports = (req, res, next)=>{
             }
             else{
                 console.log("User not signed in!");
+                res.render('/')
             }
         })
     }

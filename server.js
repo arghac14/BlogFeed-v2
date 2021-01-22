@@ -57,17 +57,6 @@ app.get('/feed', (req, res)=>{
     })
 });
 
-app.get('/post/:id', (req, res)=>{
-    console.log(req.params.id) 
-    console.log("Post");
-    Posts.findOne({_id: req.params.id })
-        .populate("author","_id name")
-        .then(post=>{
-           console.log(post)
-            res.json(post)
-        })
-});
-
 app.get('/addpost', requiredAuth, addPost)
 
 app.post('/addpost', requiredAuth, (req, res)=>{
@@ -91,8 +80,8 @@ app.post('/addpost', requiredAuth, (req, res)=>{
 })
 
 app.get('/user/:id', (req, res)=>{
-    console.log(req.params.id)
-    console.log("user's feed")
+    //console.log(req.params.id)
+    console.log("User's feed")
     // Users.findOne({_id: req.params.id})
     // .select("-password")
     // .then(user=>{
@@ -114,14 +103,14 @@ app.get('/user/:id', (req, res)=>{
         .populate("author","_id name")
         .sort('-createdAt')
         .then(post=>{
-           console.log(post[0].author.name)
+           console.log(post)
             res.json({post, name: post[0].author.name})
         })
 });
 
 app.get('/post/:id', (req, res)=>{
     console.log(req.params.id) 
-    console.log("Post");
+    console.log("Post: '/post/:id'");
     Posts.findOne({_id: req.params.id })
         .populate("author","_id name")
         .then(post=>{
@@ -130,7 +119,7 @@ app.get('/post/:id', (req, res)=>{
         })
 });
 app.post('/profile', (req, res)=>{
-    console.log("My Poss!");
+    console.log("My Poss! '/profile'");
     //console.log(req.body.id)
     //console.log(req.params.username)
         Posts.find({author: req.body.id })

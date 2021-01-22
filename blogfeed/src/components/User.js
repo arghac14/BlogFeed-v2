@@ -127,12 +127,13 @@ import M from 'materialize-css';
 function Profile() {
   const [mypic, setPics] = useState([])
   const [myname, setName] = useState('')
+
   const history = useHistory()
   const {userId} = useParams()
   const {state, dispatch} = useContext(userContext)
   //  var id = JSON.parse(localStorage.getItem('user'))._id
     useEffect(()=>{
-      fetch(`http://localhost:5000/user/${userId}`,{
+      fetch(`/user/${userId}`,{
         method: "GET",
         headers:{
             "Content-Type":"application/json",
@@ -145,7 +146,8 @@ function Profile() {
             //console.log(mypic)
             setPics(result.post)
             setName(result.name)
-            //console.log(mypic)
+            
+            console.log(result)
         }
         else{
             M.toast({html: "Something went wrong!",classes:"#c62828 red darken-3"})
@@ -185,6 +187,7 @@ function Profile() {
         src = {require("../assets/logo3.PNG")}/>
         <br></br><br></br>
         <h3>{myname}</h3>
+        {/* <h4>{myusername}</h4> */}
        
          
 
