@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import M from 'materialize-css';
 
 function Feed() {
-    //console.log("Feed")
+    console.log("Feed")
     const [data, setData] = useState([])
     const history = useHistory()
     const {state, dispatch} = useContext(userContext)
@@ -60,7 +60,7 @@ function Feed() {
                                 <div class="card-body">
                                     <h4 class="card-title">{item.title}</h4>
                                 <small class="text-muted cat">
-                                    Posted by <Link to={'/profile/'+item.author._id}>{item.author?item.author.name:"Unknown user"}</Link>
+                                    Posted by <Link to={'/user/'+item.author._id}>{item.author?item.author.name:"Unknown user"}</Link>
                                 </small>
                                 <p class="card-text">{item.tag}</p>
                                 <a href = {'/post/'+item._id} style={{backgroundColor: "#ed6663" ,color: "whitesmoke", border: "none"}} class="btn-neu btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; See full story</a>

@@ -38,7 +38,7 @@ const Routing=()=>{
               <Route exact path = '/signin' component = {()=><Signin/>}/>
               <Route exact path = '/' component = {()=><Feed/>}/>
               <Route exact path = '/profile' component = {()=><Profile/>}/>
-              <Route path = '/profile/:userId' component = {()=><User/>}/>
+              <Route path = '/user/:userId' component = {()=><User/>}/>
               <Route path = '/post/:postId' component = {()=><Post/>}/>
               <Route path = '/addpost' component = {()=><AddPost/>}/>
               <Redirect to='/'/>

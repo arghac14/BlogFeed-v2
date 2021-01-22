@@ -88,7 +88,7 @@ function Profile() {
                       
                         <h4 className="card-title">{item.title}</h4>
                         <small className="text-muted cat">
-                          Posted by <Link to={'/profile/'+item.author._id}>{item.author.name}</Link>
+                          Posted by <Link to={'/user/'+item.author._id}>{item.author.name}</Link>
                         </small>
                         <p className="card-text">{item.tag}</p>
                         

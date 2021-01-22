@@ -92,6 +92,7 @@ app.post('/addpost', requiredAuth, (req, res)=>{
 
 app.get('/user/:id', (req, res)=>{
     console.log(req.params.id)
+    console.log("user's feed")
     // Users.findOne({_id: req.params.id})
     // .select("-password")
     // .then(user=>{
