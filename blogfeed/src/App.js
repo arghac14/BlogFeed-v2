@@ -27,7 +27,8 @@ const Routing=()=>{
       //history.push('/')
     }
     else{
-      history.push('/signin')
+      console.log("Anonymous!")
+      //history.push('/signin')
     }
   },[])
 
@@ -35,6 +36,7 @@ const Routing=()=>{
     <div>
      
           <Switch>
+              <Route exact path = '/' component = {()=><Feed/>}/>
               <Route exact path = '/signup' component = {()=><Signup/>}/>
               <Route exact path = '/signin' component = {()=><Signin/>}/>
               <Route exact path = '/' component = {()=><Feed/>}/>

@@ -19,7 +19,7 @@ const Navbar = ()=> {
       }
       else{
         return [
-          <li><Link to="/feed"><i class="fa fa-rss" aria-hidden="true"></i>&nbsp; Feed</Link></li>,
+          <li><Link to="/"><i class="fa fa-rss" aria-hidden="true"></i>&nbsp; Feed</Link></li>,
           <li><Link to="/addpost"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Create Post</Link></li>,
           <li><Link to="/profile"><i className="fa fa-user" aria-hidden="true"></i>&nbsp; My Feed</Link></li>,
           <li><Link to="#" onClick={()=>{
