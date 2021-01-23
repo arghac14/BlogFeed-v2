@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Feed from './components/Feed';
 import Profile from './components/Profile';
+import NotFoundPage from './components/NotFoundPage';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Post from './components/Post';
@@ -45,6 +46,9 @@ const Routing=()=>{
               <Route path = '/post/:postId' component = {()=><Post/>}/>
               <Route path = '/addpost' component = {()=><AddPost/>}/>
               {/* <Redirect to='/'/> */}
+              <Route>
+              <NotFoundPage />
+              </Route>
           </Switch>
     </div>
   )}
