@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import Navbar from './Navbar';
 import M from 'materialize-css';
+import {Link} from 'react-router-dom';
 
 function Signup() {
     const [fullName, setfullName] = useState("")
@@ -51,7 +52,7 @@ function Signup() {
                     <input required type="password" placeholder="Password" onChange={(e)=>setpassWord(e.target.value)}/>
                     <br/><br></br><button onClick={(e)=>postData(e)} style={{backgroundColor: "#ed6663", color:"whitesmoke"}} className="btn waves-effect waves-light">Register</button>
                     <br/><br></br>
-                    <span>Already have an account? <a href="/signin">Sign In</a></span>
+                    <span>Already have an account? <Link to="/signin">Sign In</Link></span>
                     <br/>
                     
                     

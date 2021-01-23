@@ -1,8 +1,9 @@
 import React, {useState, useContext} from 'react';
 import Footer from './Footer'
-import {useHistory} from 'react-router-dom'
+import {useHistory, Link} from 'react-router-dom'
 import {userContext} from '../App';
 import M from 'materialize-css';
+
 
 function Signin() {
     const {state, dispatch} = useContext(userContext);
@@ -49,7 +50,7 @@ function Signin() {
                     <input required type="password" placeholder="Password" onChange={(e)=>setpassWord(e.target.value)}/>
                     <br/><button onClick={()=>getData()} style={{backgroundColor: "#ed6663", color:"whitesmoke"}} className="btn waves-effect waves-light">Submit</button>
                     <br/>
-                    <span>Don't have an account? <a href="/signup">Sign up</a></span>
+                    <span>Don't have an account? <Link to="/signup">Sign up</Link></span>
                     <br/> 
             </div>
         </div>

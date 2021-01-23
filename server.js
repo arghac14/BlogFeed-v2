@@ -120,7 +120,7 @@ app.post('/profile', (req, res)=>{
 
 
 
-app.get('/signup', middleWare, signUp);
+
 
 app.get('/signin', middleWare, (req, res)=>{
     console.log("Signin!");
@@ -162,6 +162,10 @@ app.post('/signin', (req, res)=>{
         }
     });
 })
+
+app.get('/signup', middleWare, (req, res)=>{
+    console.log("Signup!");
+});
 
 app.post('/signup', (req, res)=>{
     console.log(req.body);
