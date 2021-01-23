@@ -63,7 +63,9 @@ function Feed() {
                                     Posted by <Link to={'/user/'+item.author._id}>{item.author?item.author.name:"Unknown user"}</Link>
                                 </small>
                                 <p class="card-text">{item.tag}</p>
-                                <a href = {'/post/'+item._id} style={{backgroundColor: "#ed6663" ,color: "whitesmoke", border: "none"}} class="btn-neu btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; See full story</a>
+                                <small className="text-muted cat">
+                                    <Link to={'/post/'+item._id}><a href = {'/post/'+item._id} style={{backgroundColor: "#ed6663", color: "whitesmoke", border: "none"}} class="btn-neu btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; See full story</a></Link>
+                                </small>
                                 </div>
                                 <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                                     <div class="views">

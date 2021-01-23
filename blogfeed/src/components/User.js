@@ -1,22 +1,24 @@
 import React,{useEffect, useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import {userContext} from '../App';
+import {Link} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import M from 'materialize-css';
 
 function User() {
+  console.log("User.js")
   const [mypic, setPics] = useState([])
   const [myname, setName] = useState('')
 
   const history = useHistory()
   const {userId} = useParams()
   const {state, dispatch} = useContext(userContext)
-  //  var id = JSON.parse(localStorage.getItem('user'))._id
+  
     useEffect(()=>{
-      fetch(`/user/${userId}`,{
-        method: "GET",
+      fetch(`/profile/${userId}`,{
+      //  method: "GET",
         headers:{
-            "Content-Type":"application/json",
+          //  "Content-Type":"application/json",
             "Authorization": "token " + localStorage.getItem("jwt")
         },
       })
@@ -75,12 +77,14 @@ function User() {
                       
                         <h4 className="card-title">{item.title}</h4>
                         <small className="text-muted cat">
-                          Posted by <a href="">{item.author.name}</a>
+                          Posted by <Link to={'/user/'+item.author._id}>{item.author.name}</Link>
                         </small>
                         <p className="card-text">{item.tag}</p>
                         
-                        <a href = {'/post/'+item._id}  style={{backgroundColor: "#ed6663" ,color: "whitesmoke", border: "none"}} class="btn-neu btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; See full story</a>&nbsp;&nbsp;
-                      
+                        <small className="text-muted cat">
+                         <Link to={'/post/'+item._id}><a href = {'/post/'+item._id} style={{backgroundColor: "#ed6663", color: "whitesmoke", border: "none"}} class="btn-neu btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; See full story</a></Link>
+                          
+                        </small>
                       </div>
                         <div className="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                           <div className="views">

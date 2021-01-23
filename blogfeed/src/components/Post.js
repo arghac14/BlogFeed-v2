@@ -11,33 +11,38 @@ function Post() {
     const {state, dispatch} = useContext(userContext)
 
     useEffect(()=>{
-        fetch(`/post/${postId}`,{
-          method: "GET",
+        console.log("Post.js")
+        fetch(`/blog/${postId}`,{
+          //method: "GET",
           headers:{
-              "Content-Type":"application/json",
+            // "Content-Type":"application/json",
               "Authorization": "token " + localStorage.getItem("jwt")
           },
         })
+        
         .then(res=>res.json())
         .then(result=>{
+            //console.log("Here")
             if(result){
-              console.log(result)
+              console.log("Here's the post:",result)
               setPost(result)
               //console.log(mypic)
           }
-          else{
+            else{
+                console.log("wrong")
               M.toast({html: "Something went wrong!",classes:"#c62828 red darken-3"})
-          }
+              }
         })
+        .catch(e=>console.log(e))
       },[])
 
       
     return (
-        <div>
-             <div className="post2-card post-neu center" style={{backgroundColor:"#ffd5cd"}} >
+        <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}> 
+             <div className="post2-card  center" style={{backgroundColor:"#ffd5cd"}} >
             <div className="container">
             <div className="row">
-                <div className="card" style={{borderRadius: "20px 20px 20px 20px"}}>
+                <div className="card post-neu" style={{borderRadius: "20px 20px 20px 20px"}}>
                     <img className="card-img" style={{borderRadius: "20px 20px 0 0"}} src={mypost.image}alt="Bologna"/>
                     <div className="card-img-overlay">
                     </div>

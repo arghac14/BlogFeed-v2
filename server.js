@@ -53,11 +53,11 @@ app.get('/feed', (req, res)=>{
     .sort('-createdAt')
     .then(posts=>{
         res.json(posts)
-        console.log(posts)
+        //console.log(posts)
     })
 });
 
-app.get('/user/:id', (req, res)=>{
+app.get('/profile/:id', (req, res)=>{
     console.log("User's feed")
     console.log(req.params)
     Posts.find({author: req.params.id })
@@ -69,7 +69,7 @@ app.get('/user/:id', (req, res)=>{
         })
 });
 
-app.get('/post/:id', (req, res)=>{
+app.get('/blog/:id', (req, res)=>{
     console.log(req.params.id) 
     console.log("Post: '/post/:id'");
     Posts.findOne({_id: req.params.id })

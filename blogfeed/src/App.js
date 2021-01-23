@@ -9,7 +9,7 @@ import Signin from './components/Signin';
 import Post from './components/Post';
 import AddPost from './components/AddPost';
 import User from './components/User';
-import {BrowserRouter, Route, Redirect, Switch, useHistory} from 'react-router-dom';
+import {HashRouter, BrowserRouter, Route, Redirect, Switch, useHistory} from 'react-router-dom';
 import {reducer, initialState} from './reducers/userReducer'
 import 'font-awesome/css/font-awesome.min.css'
 

@@ -91,8 +91,11 @@ function Profile() {
                           Posted by <Link to={'/user/'+item.author._id}>{item.author.name}</Link>
                         </small>
                         <p className="card-text">{item.tag}</p>
-                        
-                        <a href = {'/post/'+item._id} style={{backgroundColor: "#ed6663", color: "whitesmoke", border: "none"}} class="btn-neu btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; See full story</a><br></br><br></br>
+                        <small className="text-muted cat">
+                         <Link to={'/post/'+item._id}><a href = {'/post/'+item._id} style={{backgroundColor: "#ed6663", color: "whitesmoke", border: "none"}} class="btn-neu btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; See full story</a></Link>
+                          
+                        </small>
+                       <br></br>
                         {(item.author._id === state._id)
                         && <a style={{backgroundColor: "#ed6663", color: "whitesmoke", border: "none"}} class="btn-neu btn btn-danger" onClick={()=>deletePost(item._id)}><i class="fa fa-trash" aria-hidden="true"></i> delete</a>                  
                         }  
