@@ -24,7 +24,7 @@ const Routing=()=>{
     //console.log(user)
     if(user){
       dispatch({type:"USER", payload: user})
-      history.push('/')
+      //history.push('/')
     }
     else{
       history.push('/signin')
@@ -42,7 +42,7 @@ const Routing=()=>{
               <Route path = '/user/:userId' component = {()=><User/>}/>
               <Route path = '/post/:postId' component = {()=><Post/>}/>
               <Route path = '/addpost' component = {()=><AddPost/>}/>
-              <Redirect to='/'/>
+              {/* <Redirect to='/'/> */}
           </Switch>
     </div>
   )}
