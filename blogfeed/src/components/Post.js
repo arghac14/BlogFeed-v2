@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 import {userContext} from '../App';
 import {useParams} from 'react-router-dom';
 import M from 'materialize-css';
+import ReactHtmlParser from 'react-html-parser'; 
 
 function Post() {
     const [mypost, setPost] = useState([])
@@ -51,12 +52,14 @@ function Post() {
                     <small className="text-muted cat" style={{fontSize: "20px"}}>
                         Posted on Oct 20, 12:45PM
                     </small>
+
+                    {/* <div> { ReactHtmlParser ("<h1>Hello</h1>") } </div> */}
                     <p className="card-text" style={{fontWeight: "lighter", fontSize: "30px"}}>{mypost.tag}</p>
                     
                     </div>
                     <div className="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                         <div className="views postbig" style={{fontWeight: "lighter", fontSize: "18px", textAlign: "justify", textJustify: "inter-word"}}>
-                            {mypost.body}
+                            <div> { ReactHtmlParser (mypost.body) } </div>
                         </div>
                     </div>
                     </div>

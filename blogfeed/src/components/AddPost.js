@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import M from 'materialize-css';
+ 
 
 function AddPost() {
     console.log("Addpost")
@@ -86,7 +87,8 @@ return (
                 <input required type="text" onChange={(e)=>setTitle(e.target.value)} placeholder="Title" maxLength = "30"/>
                 <input required type="text" onChange={(e)=>setTag(e.target.value)} placeholder="Tagline" maxLength = "90"/><br></br>
                 <input required type="file" onChange={(e)=>setImage(e.target.files[0])} placeholder="Add cover image: "></input><br></br>
-                <textarea required className="btn-neu" maxLength="4000" onChange={(e)=>setBody(e.target.value)} placeholder="Share your story here.." style={{height: "500px", fontSize:"20px"}} maxLength = "5000" rows="100" cols="100"></textarea>
+                <textarea required contentEditable = "true" className="btn-neu" maxLength="4000" onChange={(e)=>setBody(e.target.value)} placeholder="Share your story here.." style={{height: "500px", fontSize:"20px"}} maxLength = "5000" rows="100" cols="100"></textarea>
+                    
                 <br/><br/><button onClick={()=>addPost()} style={{backgroundColor: "#ed6663", color:"whitesmoke"}} className="btn-neu btn waves-effect waves-light">Submit</button>
                 <br/>
         </div>
