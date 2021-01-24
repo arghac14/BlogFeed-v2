@@ -49,7 +49,7 @@ function AddPost() {
     const addPost =(e)=>{
         
         M.toast({html: "Please add all the fields", classes:"#c62828 red darken-3"})
-        //console.log(image)
+        console.log(e)
         var formdata = new FormData();
 
         formdata.append("file", image);
@@ -86,8 +86,10 @@ return (
                 <h2 style={{color: "#ed6663"}}>Create a post</h2>
                 <input required type="text" onChange={(e)=>setTitle(e.target.value)} placeholder="Title" maxLength = "30"/>
                 <input required type="text" onChange={(e)=>setTag(e.target.value)} placeholder="Tagline" maxLength = "90"/><br></br>
-                <input required type="file" onChange={(e)=>setImage(e.target.files[0])} placeholder="Add cover image: "></input><br></br>
-                <textarea required contentEditable = "true" className="btn-neu" maxLength="4000" onChange={(e)=>setBody(e.target.value)} placeholder="Share your story here.." style={{height: "500px", fontSize:"20px"}} maxLength = "5000" rows="100" cols="100"></textarea>
+                {/* <label for="files" style={{backgroundColor: "#ed6663", color:"whitesmoke"}} className="btn-neu btn waves-effect waves-light">Select Image</label> */}
+                <input id="filesFor" style={{visibility:"visible"}} required type="file" onChange={(e)=>setImage(e.target.files[0])} placeholder="Add cover image: "></input><br></br>
+                <textarea required contentEditable = "true" className="btn-neu" maxLength="4000" onChange={(e)=>setBody(e.target.value)} placeholder=" Share your story here..
+                Note: Markup supported!" style={{height: "500px", fontSize:"20px"}} maxLength = "5000" rows="100" cols="100"></textarea>
                     
                 <br/><br/><button onClick={()=>addPost()} style={{backgroundColor: "#ed6663", color:"whitesmoke"}} className="btn-neu btn waves-effect waves-light">Submit</button>
                 <br/>
