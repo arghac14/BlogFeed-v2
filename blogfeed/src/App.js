@@ -57,11 +57,11 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
   return (
     <userContext.Provider value={{state, dispatch}}>
-        <BrowserRouter>
+        <HashRouter>
         <Navbar/><br></br><br></br><br></br><br></br>
           {/* <Footer/> */}
         <Routing/>
-        </BrowserRouter>
+        </HashRouter>
      </userContext.Provider>
     
   );
