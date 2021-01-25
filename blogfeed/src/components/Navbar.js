@@ -12,7 +12,7 @@ const Navbar = ()=> {
     const renderList=()=>{
       if(!state){ 
         return [
-          <li><Link to="/feed"><i class="fa fa-rss"></i>&nbsp; Feed</Link></li>,
+          // <li><Link to="/feed"><i class="fa fa-rss"></i>&nbsp; Feed</Link></li>,
           <li><Link to="/signin"><i class="fa fa-sign-out"></i>&nbsp; Sign In</Link></li>,
           <li><Link to="/signup"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; Sign Up</Link></li>
         ]

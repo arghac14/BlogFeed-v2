@@ -87,14 +87,16 @@ app.post('/addpost', requiredAuth, (req, res)=>{
     console.log("Addpost-server")
     const {title, tag, body, image} = req.body;
     console.log(req.body)
+    console.log(new Date().toLocaleString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }))
     var post = new Posts({
         title: title,
         tag: tag,
         body: body,
         image: image,
         author: req.user,
-        date: new Date().toLocaleString()
+        date: new Date().toLocaleString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
     });
+    
     
     post.save(function(err, story) {
         if (err) throw err;
