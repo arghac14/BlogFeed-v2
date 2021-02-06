@@ -49,7 +49,11 @@ function Profile() {
         })
         setPics(newData)
       })
+      
+      
    }
+    
+    
 
     return (
     <div>

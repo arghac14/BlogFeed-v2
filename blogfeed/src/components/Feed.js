@@ -44,7 +44,6 @@ function Feed() {
        <h3>A blogging site</h3><br></br>
 
       </div>
-      <h2 style={{textAlign: "center"}}>All Posts:</h2>
       <div className="gen-feed">
         {
             data.map(item=>{
