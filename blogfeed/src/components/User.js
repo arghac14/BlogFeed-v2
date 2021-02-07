@@ -62,8 +62,9 @@ function User() {
        {!adminImage?
        <div style={{fontSize: "25px"}}>
        <a href="https://www.facebook.com/arghac14/"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-facebook" aria-hidden="true"></i> &nbsp;</a>
-       <a href="https://www.instagram/argha_c14"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-instagram" aria-hidden="true"></i> &nbsp;</a>
+       <a href="https://www.instagram.com/argha_c14"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-instagram" aria-hidden="true"></i> &nbsp;</a>
        <a href="https://www.github.com/arghac14"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-github" aria-hidden="true"></i> &nbsp;</a>
+       <a href="https://www.linkedin.com/in/arghac14"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-linkedin" aria-hidden="true"></i> &nbsp;</a>
        <a href="http://www.arghac14.me"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-globe" aria-hidden="true"></i> &nbsp;</a>
        <a href="mailto:01argha@gmail.com"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-envelope" aria-hidden="true"></i> &nbsp;</a>
        <a href="tel:8637384257"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-phone" aria-hidden="true"></i> &nbsp;</a>
