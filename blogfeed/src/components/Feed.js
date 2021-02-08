@@ -41,7 +41,7 @@ function Feed() {
         src = {require("../assets/logo1.PNG")}/>
         <br></br><br></br>
        <h1>BlogFeed</h1>
-       <h3>A blogging site</h3><br></br>
+       <h3>A blogging site <i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-pencil" aria-hidden="true"></i></h3><br></br>
 
       </div>
       <div className="gen-feed">

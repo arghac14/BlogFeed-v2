@@ -79,7 +79,8 @@ function User() {
       {   
            mypic.map(item=>{
              return (
-                
+          
+            <div className="col-12 col-sm-12 col-md-12 col-lg-12" style={{display: "inline-grid"}}>
               <div className="profile-feed" key={item._id} > 
               <div className="post-card" style={{backgroundColor:"#ffd5cd"}}>
                 <div className="container">
@@ -115,7 +116,7 @@ function User() {
                 </div>
               </div>
             </div>
-      
+            </div>
              )
            })
       }
