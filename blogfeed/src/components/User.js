@@ -61,6 +61,7 @@ function User() {
         <h3>{myname}</h3>
        {!adminImage?
        <div style={{fontSize: "25px"}}>
+         <hr></hr>
        <a href="https://www.facebook.com/arghac14/"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-facebook" aria-hidden="true"></i> &nbsp;</a>
        <a href="https://www.instagram.com/argha_c14"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-instagram" aria-hidden="true"></i> &nbsp;</a>
        <a href="https://www.github.com/arghac14"><i style={{textDecoration: "none", color: "#ED6663"}} class="fa fa-github" aria-hidden="true"></i> &nbsp;</a>

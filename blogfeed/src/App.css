@@ -178,7 +178,8 @@ body{
 footer {
   width:100vw;
   position:fixed;
-  bottom:0px;
+  bottom:0PX;
+  z-index: -1;
 }
 footer div {
   background-color: var(--col-deepblue);

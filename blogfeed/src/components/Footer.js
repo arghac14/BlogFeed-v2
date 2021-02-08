@@ -34,7 +34,7 @@ function Footer() {
  </g>  
 </svg> */}
 
-  <div style={{backgroundColor: "rgb(34, 167, 240)"}}><a href="https://arghac14.github.io" style={{fontSize:"20px",color: "whitesmoke", fontWeight: "bold"}} >&copy; 2020 Arghadip Chakraborty</a></div>
+  <div style={{backgroundColor: "rgb(237,102,99)"}}><a href="https://arghac14.github.io" style={{fontSize:"20px",color: "whitesmoke", fontWeight: "bold"}} >&copy; 2020 Arghadip Chakraborty</a></div>
 </footer>
         </div>
     )
