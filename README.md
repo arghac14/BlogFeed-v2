@@ -10,3 +10,6 @@ React, Redux, Node, Express, MongoDB
 ![](https://github.com/arghac14/BlogFeed-v2/blob/master/snapshots/Capture4.JPG)
 ![](https://github.com/arghac14/BlogFeed-v2/blob/master/snapshots/Capture2.PNG)
 ![](https://github.com/arghac14/BlogFeed-v2/blob/master/snapshots/Capture3.PNG)
+
+## Verion 1.0:
+https://github.com/arghac14/BlogFeed
