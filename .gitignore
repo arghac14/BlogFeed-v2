@@ -1,0 +1,8 @@
+# Ignore Visual Studio files
+.vs/
+
+# Ignore node_modules folder
+node_modules/
+
+# Ignore credentials.json file
+credentials.json

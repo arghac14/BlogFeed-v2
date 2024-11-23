@@ -1,9 +1,15 @@
-module.exports = {
-    signUp: function(req, res){
-        res.render('signup.ejs')
-    },
+const express = require('express');
+const router = express.Router();
 
-    addPost: (req, res)=>{
-        res.render('addpost.ejs')
-    }
-}
+// Auth endpoints
+router.post('/signin', (req, res) => {
+    // Add logic for signing in
+    res.send('Sign-in successful');
+});
+
+router.post('/signup', (req, res) => {
+    // Add logic for signing up
+    res.send('Sign-up successful');
+});
+
+module.exports = router;
