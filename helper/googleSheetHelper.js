@@ -12,7 +12,8 @@ const auth = new google.auth.GoogleAuth({
 });
 
 const entities= {
-    USERS: "Users"
+    USERS: "Users",
+    BLOGS: "Blogs"
 }
 
 const entityRange = (entity, entityId = null) =>{
@@ -20,6 +21,10 @@ const entityRange = (entity, entityId = null) =>{
     let lastCol = 'B';
     switch(entity){
         case entities.USERS:
+            firstCol = 'A';
+            lastCol = 'F'
+            break;
+        case entities.BLOGS:
             firstCol = 'A';
             lastCol = 'F'
             break;
@@ -31,30 +36,41 @@ const entityRange = (entity, entityId = null) =>{
     : `${entity}!${firstCol}:${lastCol}`;
 }
 
-const processUserPayload = (userRequestData) => {
+const processPayload = (entity, requestData) => {
     const userModelFields = [
         'Name', 'UserName', 'Password', 'ProfilePhoto', 'CreatedAt', 'UpdatedAt'
     ];
+    const blogModelFields = [
+        'Title', 'Content', 'UserId', 'CoverPhoto', 'CreatedAt', 'UpdatedAt'
+    ];
 
-    const values = userModelFields.map(field => {
-        // Convert both field name and userRequestData keys to lowercase for case-insensitive comparison
+    var modelFields = [];
+    switch(entity){
+        case entities.USERS:
+            modelFields = userModelFields;
+            break;
+        case entities.BLOGS:
+            modelFields = blogModelFields;
+            break;
+    }
+
+    const values = modelFields.map(field => {
         const fieldLowerCase = field.toLowerCase();
-        const matchingKey = Object.keys(userRequestData).find(
+        const matchingKey = Object.keys(requestData).find(
             key => key.toLowerCase() === fieldLowerCase
         );
 
-        // If CreatedAt is missing, set it to the current date/time
         if (fieldLowerCase === 'createdat') {
-            return matchingKey ? userRequestData[matchingKey] : new Date().toISOString();
+            return matchingKey ? requestData[matchingKey] : new Date().toISOString();
         }
 
-        // Return the value from userRequestData or null if not found
-        return matchingKey ? userRequestData[matchingKey] : null;
+        return matchingKey ? requestData[matchingKey] : null;
     });
 
     // Return the result wrapped in an object with "values" key and values wrapped in an array
     return { values: [values] };
 };
+
 
 // Initialize Google Sheets API client
 const sheets = google.sheets({ version: 'v4', auth });
@@ -84,11 +100,11 @@ const GoogleSheetHelper = {
 
     async post(entity, payload) {
         try {
-            var requestBody = processUserPayload(payload);
+            var requestBody = processPayload(entity, payload);
             console.log(entityRange(entity), requestBody)
             var response = await sheets.spreadsheets.values.append({
                 spreadsheetId: SPREADSHEET_ID,
-                range: 'Users!A:F',
+                range: entityRange(entity),
                 valueInputOption: 'RAW',
                 requestBody: requestBody
             });
@@ -102,7 +118,7 @@ const GoogleSheetHelper = {
 
     async update(entity, id, payload) {
         try {
-            var requestBody = processUserPayload(payload);
+            var requestBody = processPayload(entity, payload);
             var response = await sheets.spreadsheets.values.update({
                 spreadsheetId: SPREADSHEET_ID,
                 range: entityRange(entity, id),  // Example: 'Users!A17:E17'

@@ -1,20 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
 
 const {GoogleSheetHelper, entities} = require('../helper/googleSheetHelper');
-
-const { google } = require('googleapis');
-
-const credentials = JSON.parse(fs.readFileSync('credentials.json'));
-
-const auth = new google.auth.GoogleAuth({
-    credentials,
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-});
-
-const SPREADSHEET_ID = '1fV21PBcRH3o31Ggvn_thqvh77sqdDDpvAVa4hBWEPKw'; // Replace with your Google Sheet ID
-
 
 // Profile entity endpoints
 
@@ -25,13 +12,14 @@ router.get('/', async (req, res) => {
         var rows = data;
         const formattedData = rows.map((row, index) => {
             if (index < 2) return null;
-            // Treat the first row as data if it's the only row available
-            const rowNumber = index + 1; // Row numbers start at 1
-            const [UserName, password] = row;
+            const rowNumber = index + 1;
+            const [userName, password, profilePhoto, createdAt, updatedAt] = row;
             return {
-                Id: rowNumber,
-                UserName,
+                id: rowNumber,
+                userName,
                 password,
+                createdAt,
+                updatedAt
             };
         }).filter(Boolean);
 
@@ -55,11 +43,13 @@ router.get('/:id', async (req, res) => {
 
         const formattedData = rows.map((row, index) => {
             const rowNumber = id; 
-            const [UserName, password] = row;
+            const [userName, password, profilePhoto, createdAt, updatedAt] = row;
             return {
-                Id: rowNumber,
-                UserName,
+                id: rowNumber,
+                userName,
                 password,
+                createdAt,
+                updatedAt
             };
         }).filter(Boolean);
 
@@ -105,7 +95,6 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const { name, userName, password } = req.body;
         const id = req.params.id;
         const data = await GoogleSheetHelper.delete(entities.USERS, id);
         res.send(data);
