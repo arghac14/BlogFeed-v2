@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-
+const authenticateToken = require('../middleware/authenticate');
 const {GoogleSheetHelper, entities} = require('../helper/googleSheetHelper');
 
 // Blog entity endpoints
-router.get('/', async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
     try {
         const data = await GoogleSheetHelper.get(entities.BLOGS);
         // Extract rows from the response

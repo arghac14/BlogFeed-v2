@@ -35,7 +35,6 @@ router.get('/:id', async (req, res) => {
         const data = await GoogleSheetHelper.get(entities.USERS, id);
         // Extract rows from the response
         var rows = data;
-        console.log(rows)
         
         if (!rows || rows.length === 0) {
             return res.status(404).send('No data found for the give id:', id);

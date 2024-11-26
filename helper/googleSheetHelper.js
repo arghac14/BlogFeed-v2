@@ -101,14 +101,12 @@ const GoogleSheetHelper = {
     async post(entity, payload) {
         try {
             var requestBody = processPayload(entity, payload);
-            console.log(entityRange(entity), requestBody)
             var response = await sheets.spreadsheets.values.append({
                 spreadsheetId: SPREADSHEET_ID,
                 range: entityRange(entity),
                 valueInputOption: 'RAW',
                 requestBody: requestBody
             });
-            console.log(response)
             return { id : extractRowNumber(response.data.updates.updatedRange), message: 'Data added successfully' };
         } catch (error) {
             cconsole.error(`Something went wrong:`, error.message);

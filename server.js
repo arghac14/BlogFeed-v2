@@ -1,6 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var cors = require('cors')
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
+
 const userRoutes = require('./routes/user');
 const blogRoutes = require('./routes/blog');
 const authRoutes = require('./routes/auth');
@@ -27,7 +29,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRoutes);
 app.use('/api/blogs', blogRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/api/', authRoutes);
 
 
 if(process.env.NODE_ENV==="production"){
