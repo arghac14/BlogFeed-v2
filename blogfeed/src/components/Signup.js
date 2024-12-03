@@ -13,6 +13,7 @@ function Signup() {
     const navigate = useNavigate()
     const postData = async (e)=>{
         var singupRequestData = {
+            name: fullName,
             userName,
             password: passWord
         }
@@ -32,8 +33,8 @@ function Signup() {
                     <input required type="text" placeholder="Full Name" onChange={(e)=>setfullName(e.target.value)}/>
                     <input required type="text" placeholder="Username" onChange={(e)=>setuserName(e.target.value)}/>
                     <input required type="password" placeholder="Password" onChange={(e)=>setpassWord(e.target.value)}/>
-                    <br/><br></br><button onClick={(e)=>postData(e)} style={{backgroundColor: "#ed6663", color:"whitesmoke"}} className="btn waves-effect waves-light">Register</button>
-                    <br/><br></br>
+                    <br/><button onClick={(e)=>postData(e)} className="btn primary-btn">Register</button>
+                    <br/>
                     <span>Already have an account? <Link to="/signin">Sign In</Link></span>
                     <br/>
                     

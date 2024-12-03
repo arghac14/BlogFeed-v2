@@ -1,7 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 
 .header{
-  top: 0%
+  top: 0%;
+}
+
+.app-body{
+  margin-top: 90px;
+}
+
+.primary-btn{
+  background-color: #ed6663;
+  color: whitesmoke;
 }
 
 :root {

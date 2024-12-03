@@ -3,10 +3,20 @@ import {NavLink, Link} from 'react-router-dom';
 import {useNavigate } from 'react-router-dom';
 import M from 'materialize-css';
 import 'font-awesome/css/font-awesome.min.css'
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser, setIsUserLoggedIn, selectCurrentUser, selectIsUserLoggedIn } from '../store/slices/userSlice';
+
 const Navbar = ()=> {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const currentUser = useSelector(selectCurrentUser);
+    const isUserLoggedIn  = useSelector((state) => state.user.isUserLoggedIn);
+    
+    const isUser  = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+
+    console.log(isUserLoggedIn, isUser);
     const renderList=()=>{
-      if(!true){ 
+      if(!isUserLoggedIn){ 
         return [
           // <li><Link to="/feed"><i class="fa fa-rss"></i>&nbsp; Feed</Link></li>,
           <li><Link to="/signin"><i class="fa fa-sign-out"></i>&nbsp; Sign In</Link></li>,
@@ -20,16 +30,16 @@ const Navbar = ()=> {
           <li><Link to="/profile"><i className="fa fa-user" aria-hidden="true"></i>&nbsp; My Feed</Link></li>,
           <li><Link to="#" onClick={()=>{
               localStorage.clear();
-              
               navigate('/signin')
+              dispatch(setUser(null));
+              dispatch(setIsUserLoggedIn(false));
           }} ><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Log Out</Link></li>
         ]
       }
     }
     
     return (
-        <div>
-            <header class="header">
+        <div className="header">
               <span className="logo"><img style={{width:"45px",height:"45px",borderRadius:"50%"}}
                     src = {require("../assets/logo1.PNG")}/></span>
               <input className="menu-btn" type="checkbox" id="menu-btn" />
@@ -37,8 +47,6 @@ const Navbar = ()=> {
               <ul class="menu">
               {renderList()}
               </ul>
-            </header>
-    
         </div>
     )
     

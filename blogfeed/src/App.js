@@ -12,14 +12,19 @@ import AddPost from './components/AddPost';
 import User from './components/User';
 import { createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css'
-
-
+import { Provider } from 'react-redux';
+import store from '../src/store';
 
 const App = () => {
   return (
     <div className='app'>
+      <Provider store={store}>
         <Navbar/>
-        <Outlet />
+          <div className='app-body'>
+            <Outlet />
+          </div>
+          <Footer/>
+      </Provider>
     </div>
   );
 }
