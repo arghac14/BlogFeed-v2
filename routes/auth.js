@@ -42,9 +42,10 @@ router.post('/signup', async (req, res) => {
         var users = await getAllUsers();
 
         var user = users.find(u => u.userName == userName);
+        console.log(user)
 
-        if (!user) {
-            return res.status(404).json({ message: 'User with given username already exists!' });
+        if (user) {
+            return res.status(400).json({ message: 'User with given username already exists!' });
         }
 
         var hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT, 10));
@@ -55,6 +56,10 @@ router.post('/signup', async (req, res) => {
             password: hashedPassword
         }
         const data = await GoogleSheetHelper.post(entities.USERS, userRequestData);
+        const token = jwt.sign({ username: userName }, process.env.JWT_SECRET, {
+            expiresIn: '1h',
+        });
+        data.accesstoken = token;
         res.send(data);
     } catch (error) {
         res.status(500).send('Something went wrong!', error);
@@ -90,8 +95,8 @@ router.post('/login', async (req, res) => {
         const token = jwt.sign({ username: user.userName }, process.env.JWT_SECRET, {
             expiresIn: '1h',
         });
-
-        res.status(200).json({ message: 'Login successful', accesstoken: token });
+        console.log(user)
+        res.status(200).json({ user: user, message: 'Login successful', accesstoken: token });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Error logging in', error });

@@ -1,6 +1,5 @@
 import React,{useEffect, useState, useContext} from 'react';
-import {useHistory} from 'react-router-dom';
-import {userContext} from '../App';
+import {useNavigate} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import M from 'materialize-css';
@@ -10,9 +9,7 @@ function Post() {
     const [mypost, setPost] = useState([])
     const [writer, setWriter] = useState([])
     const [id, setId] = useState([])
-    const history = useHistory()
     const {postId} = useParams()
-    const {state, dispatch} = useContext(userContext)
 
     useEffect(()=>{
         console.log("Post.js")

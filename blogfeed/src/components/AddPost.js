@@ -1,15 +1,15 @@
 import React, {useState,useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import M from 'materialize-css';
  
 
 function AddPost() {
     console.log("Addpost")
-    const history = useHistory();
+    const navigate = useNavigate();
     var user = JSON.parse(localStorage.getItem("user"));
     if(!user){
         M.toast({html: "You need to have an account first!",classes:"#c62828 red darken-3"})
-      history.push('/signin')
+        navigate('/signin')
     }
     const [title, setTitle] = useState("")
     const [tag, setTag] = useState("")
@@ -36,7 +36,7 @@ function AddPost() {
             .then(data=>{
                 M.toast({html:"Post created successfully!",classes:"#43a047 green darken-1"})
                 console.log(data)
-                history.push("/profile")
+                navigate("/profile")
                 
             })
             .catch(err=>{

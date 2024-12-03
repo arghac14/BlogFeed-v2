@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 
+.header{
+  top: 0%
+}
+
 :root {
   --color1: #ed6663;
   --color2: #ffd5cd;

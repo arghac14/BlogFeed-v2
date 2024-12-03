@@ -1,6 +1,5 @@
 import React,{useEffect, useState, useContext} from 'react';
-import {useHistory} from 'react-router-dom';
-import {userContext} from '../App';
+import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import M from 'materialize-css';
@@ -11,9 +10,7 @@ function User() {
   const [myname, setName] = useState('')
   // const [myusername, setUserName] = useState('')
 
-  const history = useHistory()
   const {userId} = useParams()
-  const {state, dispatch} = useContext(userContext)
   
     useEffect(()=>{
       fetch(`/profile/${userId}`,{

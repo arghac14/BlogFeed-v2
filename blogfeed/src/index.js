@@ -8,9 +8,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { RouterProvider } from 'react-router-dom';
+import { appRoutes } from './App';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={appRoutes}>
+      <App />
+    </RouterProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

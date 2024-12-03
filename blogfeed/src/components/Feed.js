@@ -1,15 +1,11 @@
 import React,{useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
-import {useHistory} from 'react-router-dom';
-import {userContext} from '../App';
 import Navbar from './Navbar';
 import M from 'materialize-css';
 
 function Feed() {
     console.log("Feed")
     const [data, setData] = useState([])
-    const history = useHistory()
-    const {state, dispatch} = useContext(userContext)
     const [mypost, setPost] = useState([])
 
     useEffect(()=>{
@@ -23,7 +19,6 @@ function Feed() {
     .then(res=>res.json())
     .then(result=>{
         console.log(result)
-        setData(result)
     })
     },[])
     
@@ -31,7 +26,7 @@ function Feed() {
     <div>
       <div style={{
           textAlign: "center",
-          margin: "20px 0",
+          margin: "80px 0",
           backgroundColor: "#ffd5cd",
           borderBottom: "2px solid grey",
           borderRadius: "0 0 30px 30px",
