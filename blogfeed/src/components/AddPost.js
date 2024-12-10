@@ -1,10 +1,12 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import M from 'materialize-css';
- 
+import ApiService from '../api/apiService';
+import { useSelector } from 'react-redux';
+
+const { createPost } = new ApiService();
 
 function AddPost() {
-    console.log("Addpost")
     const navigate = useNavigate();
     var user = JSON.parse(localStorage.getItem("user"));
     if(!user){
@@ -15,68 +17,69 @@ function AddPost() {
     const [tag, setTag] = useState("")
     const [body, setBody] = useState("")
     const [image, setImage] = useState("")
-    const [url, setUrl] = useState("")
+    const [imgUrl, setImgUrl] = useState("")
 
-
-    useEffect(()=>{
-        if(url){
-            fetch("/addpost",{
-                method: "post",
-                headers:{
-                    "Content-Type":"application/json",
-                    "Authorization": "token " + localStorage.getItem("jwt")
-                },
-                body: JSON.stringify({
-                    title: title,
-                    tag: tag,
-                    body: body,
-                    image: url
-                })
-            }).then(res=>res.json())
-            .then(data=>{
-                M.toast({html:"Post created successfully!",classes:"#43a047 green darken-1"})
-                console.log(data)
-                navigate("/profile")
-                
-            })
-            .catch(err=>{
-                M.toast({html: "Something went wrong!",classes:"#c62828 red darken-3"})
-                console.log(err)
-            })
+    const currentUser = useSelector((state) => state.user.user);
+    const areAllFieldsFilled = () =>{
+        if(!title || !tag || !body || !image){
+            return false;
         }
-    },[url]) 
+        return true;
+    }
+
+    const createBlogPost = async () => {
+        try{
+            var blogRequestData = {
+                title,
+                tag,
+                content: body,
+                coverPhoto: imgUrl,
+                userId: currentUser.id,
+                createdAt: new Date().toISOString()
+            }
+            await createPost(blogRequestData);
+            M.toast({html:"Post created successfully!",classes:"#43a047 green darken-1"})
+            navigate("/profile");
+        }
+        catch(ex){
+            M.toast({html: "Something went wrong!",classes:"#c62828 red darken-3"})
+        }
+    }
+
+    useEffect(() =>{       
+        if(imgUrl){
+            createBlogPost();
+        }
+      
+    }, [imgUrl]);
     
-    const addPost =(e)=>{
-        
-        M.toast({html: "Please add all the fields", classes:"#c62828 red darken-3"})
-        console.log(e)
+    const addPost = async(e) =>{
+        if(!areAllFieldsFilled()){
+            M.toast({html: "Please add all the fields", classes:"#c62828 red darken-3"});
+            return;
+        }
         var formdata = new FormData();
 
         formdata.append("file", image);
         formdata.append("cloud_name", "arghac14");
         formdata.append("upload_preset", "blogfeed");
 
-        let res = fetch(
-        "https://api.cloudinary.com/v1_1/arghac14/auto/upload",
-        {
-            method: "post",
-            mode: "cors",
-            body: formdata
-        }
-        )
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data)
-            setUrl(data.url)
-            
-        })
-        .catch(err=>{
-            M.Toast({html: "Missing required parameter!",classes:"#c62828 red darken-3"})
-            console.log("HIHI")
-            console.log(err)
-        })
 
-      
+        var uploadedResponse = await fetch("https://api.cloudinary.com/v1_1/arghac14/auto/upload", 
+            {
+                method: "post",
+                mode: "cors",
+                body: formdata
+            });
+        
+        if (uploadedResponse.ok) {
+            const data = await uploadedResponse.json();
+            console.log(data.url)
+            setImgUrl(data.url); 
+        }
+        else{
+            M.toast({html: "Something went wrong!",classes:"#c62828 red darken-3"})
+        }
 }
 
 
@@ -88,8 +91,8 @@ return (
                 <input required type="text" onChange={(e)=>setTag(e.target.value)} placeholder="Tagline" maxLength = "90"/><br></br>
                 {/* <label for="files" style={{backgroundColor: "#ed6663", color:"whitesmoke"}} className="btn-neu btn waves-effect waves-light">Select Image</label> */}
                 <input id="filesFor" style={{visibility:"visible"}} required type="file" onChange={(e)=>setImage(e.target.files[0])} placeholder="Add cover image: "></input><br></br>
-                <textarea required contentEditable = "true" className="btn-neu" maxLength="4000" onChange={(e)=>setBody(e.target.value)} placeholder=" Share your story here..
-                Note: Markup supported!" style={{height: "500px", fontSize:"20px"}} maxLength = "5000" rows="100" cols="100"></textarea>
+                <textarea required  className="btn-neu" maxLength="4000" onChange={(e)=>setBody(e.target.value)} placeholder=" Share your story here..
+                Note: Markup supported!" style={{height: "400px", fontSize:"20px"}} maxLength = "5000" rows="100" cols="100"></textarea>
                     
                 <br/><br/><button onClick={()=>addPost()} style={{backgroundColor: "#ed6663", color:"whitesmoke"}} className="btn-neu btn waves-effect waves-light">Submit</button>
                 <br/>

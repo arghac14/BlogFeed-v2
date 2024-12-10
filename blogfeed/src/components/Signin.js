@@ -3,7 +3,7 @@ import {useNavigate, Link} from 'react-router-dom'
 import M from 'materialize-css';
 import ApiService from '../api/apiService';
 import { useDispatch } from 'react-redux';
-import { setUser, setIsUserLoggedIn } from '../store/slices/userSlice';
+import { setUser } from '../store/slices/userSlice';
 const { signin } = new ApiService();
 
 function Signin() {
@@ -22,8 +22,9 @@ function Signin() {
         
         if(res.user){
             localStorage.setItem('accessToken', res.accessToken);
+            localStorage.setItem('user', JSON.stringify(res.user));
+            console.log(res)
             dispatch(setUser(res.user));
-            dispatch(setIsUserLoggedIn(true));
             navigate("/");
             M.toast({html:`Hello ${res.user.userName}!`,classes:"#43a047 green darken-1"})
         }

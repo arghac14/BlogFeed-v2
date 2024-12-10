@@ -12,13 +12,14 @@ router.get('/', authenticateToken, async (req, res) => {
         const formattedData = rows.map((row, index) => {
             if (index < 2) return null;
             const rowNumber = index + 1;
-            const [title, content, userId, coverPhoto, createdAt, updatedAt] = row;
+            const [title, tag, content, coverPhoto, userId, createdAt, updatedAt] = row;
             return {
                 id: rowNumber,
                 title,
+                tag,
                 content,
-                userId,
                 coverPhoto,
+                userId,
                 createdAt,
                 updatedAt
             };
@@ -62,12 +63,21 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const { title, content, userId } = req.body;
+        const { 
+            title,
+            tag,
+            content,
+            coverPhoto,
+            userId } = req.body;
         var blogRequestData = {
             title,
+            tag,
             content,
-            userId
+            coverPhoto,
+            userId,
+            createdAt : new Date().toISOString()
         }
+        console.log(blogRequestData)
         const data = await GoogleSheetHelper.post(entities.BLOGS, blogRequestData);
         res.send(data);
     } catch (error) {
@@ -81,7 +91,9 @@ router.put('/:id', async (req, res) => {
         const id = req.params.id;
         var blogRequestData = {
             title,
+            tag,
             content,
+            coverPhoto,
             userId
         }
         const data = await GoogleSheetHelper.update(entities.BLOGS, id, blogRequestData);

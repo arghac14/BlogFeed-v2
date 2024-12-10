@@ -41,7 +41,7 @@ const processPayload = (entity, requestData) => {
         'Name', 'UserName', 'Password', 'ProfilePhoto', 'CreatedAt', 'UpdatedAt'
     ];
     const blogModelFields = [
-        'Title', 'Content', 'UserId', 'CoverPhoto', 'CreatedAt', 'UpdatedAt'
+        'Title', 'Tag', 'Content', 'CoverPhoto', 'UserId', 'CreatedAt', 'UpdatedAt'
     ];
 
     var modelFields = [];

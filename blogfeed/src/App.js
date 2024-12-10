@@ -14,6 +14,7 @@ import { createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css'
 import { Provider } from 'react-redux';
 import store from '../src/store';
+import GuardedRoute from './GlobalRouterGuard'; 
 
 const App = () => {
   return (
@@ -34,12 +35,15 @@ export const appRoutes = createBrowserRouter([
     path: '/',
     element: <App/>,
     children: [
-      { path: '/', element: <Feed /> },
-      { path: '/profile', element: <Profile /> },
+      { path: '/', element: <GuardedRoute><Feed /></GuardedRoute> },
+      { 
+        path: '/profile', 
+        element: <GuardedRoute needsAuth={true}><Profile/></GuardedRoute>
+      },
       { path: '/signup', element: <Signup /> },
       { path: '/signin', element: <Signin /> },
-      { path: '/post/:id', element: <Post /> },
-      { path: '/add-post', element: <AddPost /> },
+      { path: '/post/:id', element: <GuardedRoute needsAuth={true}><Post /></GuardedRoute> },
+      { path: '/add-post', element: <GuardedRoute needsAuth={true}><AddPost /></GuardedRoute> },
     ]
   },
   { 

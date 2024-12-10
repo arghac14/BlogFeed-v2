@@ -4,19 +4,16 @@ import {useNavigate } from 'react-router-dom';
 import M from 'materialize-css';
 import 'font-awesome/css/font-awesome.min.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser, setIsUserLoggedIn, selectCurrentUser, selectIsUserLoggedIn } from '../store/slices/userSlice';
+import { setUser, selectCurrentUser } from '../store/slices/userSlice';
 
 const Navbar = ()=> {
     const navigate = useNavigate();
     const currentUser = useSelector(selectCurrentUser);
-    const isUserLoggedIn  = useSelector((state) => state.user.isUserLoggedIn);
     
-    const isUser  = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
-    console.log(isUserLoggedIn, isUser);
     const renderList=()=>{
-      if(!isUserLoggedIn){ 
+      if(!currentUser){ 
         return [
           // <li><Link to="/feed"><i class="fa fa-rss"></i>&nbsp; Feed</Link></li>,
           <li><Link to="/signin"><i class="fa fa-sign-out"></i>&nbsp; Sign In</Link></li>,
@@ -32,7 +29,6 @@ const Navbar = ()=> {
               localStorage.clear();
               navigate('/signin')
               dispatch(setUser(null));
-              dispatch(setIsUserLoggedIn(false));
           }} ><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Log Out</Link></li>
         ]
       }

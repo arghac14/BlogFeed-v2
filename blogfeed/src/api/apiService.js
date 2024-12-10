@@ -9,5 +9,13 @@ class ApiService {
         const response = await api.post('/login', payload);
         return response.data;
     }
+    async createPost(payload){
+        const response = await api.post('/blogs', payload);
+        return response.data;
+    }
+    async getPosts(){
+        const response = await api.get('/blogs');
+        return response.data;
+    }
 }
 export default ApiService;

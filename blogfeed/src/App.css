@@ -294,6 +294,8 @@ svg {
   background-color: whitesmoke;
   max-width: 500px;
   text-align: center;
+  height: auto;
+  max-height: 630px;
 }
 .post2-card{
   padding: 40px;
@@ -325,4 +327,9 @@ card-img {
 
 .card-footer {
   font-size: 0.8rem;
+}
+
+.profile-name{
+  margin: 10px;
+  font-size: 25px;
 }
