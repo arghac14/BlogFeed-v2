@@ -12,7 +12,7 @@ function Profile() {
   
   const getUserPosts = async(userId) => {
     var posts = await getPosts();
-    console.log(blogs);
+    posts = posts.filter(p => p.userId == userId);
     setBlogs(posts);
   }
 
