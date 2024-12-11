@@ -39,7 +39,7 @@ body{
 .post-neu {
   background: whitesmoke;
   box-shadow:  12px 12px 18px #bfa09a, 
-             -12px -12px 18px #ffffff;
+             12px 12px 18px #ffffff;
 }
 
 .btn-neu {
@@ -188,18 +188,17 @@ body{
 
 
 
-footer {
-  width:100vw;
-  position:fixed;
-  bottom:0PX;
-  z-index: -1;
-}
-footer div {
+
+.footer {
   background-color: var(--col-deepblue);
-  margin: -10px 0px 0px 0px;
   padding:0px;
   color: #fff;
   text-align:center;
+  position: fixed;
+  bottom: 0;
+  left: 0; /* Ensure the footer starts from the left edge */
+  width: 100%; /* Make the footer span the full width */
+  z-index: 10; 
 }
 svg {
   width:100%;
@@ -288,14 +287,25 @@ svg {
   text-align: center;
 }
 
+.profile-feed , .gen-feed {
+  margin-bottom: 10px;
+  max-height: 483px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column; /* Arrange post-cards in a column */
+  gap: 15px; /* Space between cards */
+}
 .post-card{
-  padding: 40px;
   margin: 20px auto;
   background-color: whitesmoke;
   max-width: 500px;
   text-align: center;
   height: auto;
-  max-height: 630px;
+  max-height: 600px;
+  
+  display: flex; /* Flex display for content inside the card */
+  flex-direction: column; /* Ensure content is stacked vertically */
+  background-color: #ffd5cd; /* Card background */
 }
 .post2-card{
   padding: 40px;

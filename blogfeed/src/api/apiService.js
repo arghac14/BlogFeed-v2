@@ -17,5 +17,13 @@ class ApiService {
         const response = await api.get('/blogs');
         return response.data;
     }
+    async getPost(postId){
+        const response = await api.get(`/blogs/${postId}`);
+        return response.data;
+    }
+    async getUser(userId){
+        const response = await api.get(`/users/${userId}`);
+        return response.data;
+    }
 }
 export default ApiService;

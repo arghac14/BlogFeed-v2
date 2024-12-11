@@ -24,7 +24,7 @@ const App = () => {
           <div className='app-body'>
             <Outlet />
           </div>
-          <Footer/>
+        <Footer/>
       </Provider>
     </div>
   );
@@ -40,9 +40,14 @@ export const appRoutes = createBrowserRouter([
         path: '/profile', 
         element: <GuardedRoute needsAuth={true}><Profile/></GuardedRoute>
       },
+      { 
+        path: '/profile/:userId', 
+        element: <GuardedRoute needsAuth={true}><User/></GuardedRoute>
+      },
       { path: '/signup', element: <Signup /> },
+      
       { path: '/signin', element: <Signin /> },
-      { path: '/post/:id', element: <GuardedRoute needsAuth={true}><Post /></GuardedRoute> },
+      { path: '/post/:postId', element: <GuardedRoute needsAuth={true}><Post /></GuardedRoute> },
       { path: '/add-post', element: <GuardedRoute needsAuth={true}><AddPost /></GuardedRoute> },
     ]
   },

@@ -43,17 +43,18 @@ router.get('/:id', async (req, res) => {
 
         const formattedData = rows.map((row, index) => {
             const rowNumber = id; 
-            const [title, content, userId, coverPhoto, createdAt, updatedAt] = row;
+            const [title, tag, content, coverPhoto, userId, createdAt, updatedAt] = row;
             return {
                 id: rowNumber,
                 title,
+                tag,
                 content,
-                userId,
                 coverPhoto,
+                userId,
                 createdAt,
                 updatedAt
             };
-        }).filter(Boolean);
+        }).filter(Boolean)[0];
 
         res.json(formattedData);
     } catch (error) {

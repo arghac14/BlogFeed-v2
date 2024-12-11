@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { stringify } from 'qs';
+import {useNavigate} from 'react-router-dom';
 
 import M from 'materialize-css';
 
@@ -48,6 +49,11 @@ axiosInstance.interceptors.response.use(
     // Display the error message using M.toast
     M.toast({ html: errorMessage, classes: '#c62828 red darken-3' });
 
+    if (error.response.status === 403) {
+      // Redirect to /signin if status is 403
+      window.location = '/signin'; // Or use navigate('/signin') in functional components
+    }
+    
     // Propagate the error to calling code
     return new Promise(() => {});
   }

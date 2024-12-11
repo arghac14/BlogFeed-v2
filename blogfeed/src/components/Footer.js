@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
     return (
-        <div>
+        <div className='footer'>
         <footer>
 {/* <svg viewBox="0 0 120 28">
  <defs> 

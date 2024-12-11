@@ -13,11 +13,12 @@ router.get('/', async (req, res) => {
         const formattedData = rows.map((row, index) => {
             if (index < 2) return null;
             const rowNumber = index + 1;
-            const [userName, password, profilePhoto, createdAt, updatedAt] = row;
+            const [name, userName, password, profilePhoto, createdAt, updatedAt] = row;
             return {
                 id: rowNumber,
+                name,
                 userName,
-                password,
+                profilePhoto,
                 createdAt,
                 updatedAt
             };
@@ -42,15 +43,16 @@ router.get('/:id', async (req, res) => {
 
         const formattedData = rows.map((row, index) => {
             const rowNumber = id; 
-            const [userName, password, profilePhoto, createdAt, updatedAt] = row;
+            const [name, userName, password, profilePhoto, createdAt, updatedAt] = row;
             return {
                 id: rowNumber,
+                name,
                 userName,
-                password,
+                profilePhoto,
                 createdAt,
                 updatedAt
             };
-        }).filter(Boolean);
+        }).filter(Boolean)[0];
 
         res.json(formattedData);
     } catch (error) {
