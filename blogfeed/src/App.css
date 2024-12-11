@@ -307,6 +307,17 @@ svg {
   flex-direction: column; /* Ensure content is stacked vertically */
   background-color: #ffd5cd; /* Card background */
 }
+
+.add-post-card{
+  margin: 20px auto;
+  padding: 10px;
+  background-color: whitesmoke;
+  max-width: 500px;
+  text-align: center;
+  height: auto;
+  max-height: 600px;
+}
+
 .post2-card{
   padding: 40px;
   margin: 20px auto;

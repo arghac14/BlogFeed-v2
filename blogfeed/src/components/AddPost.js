@@ -85,7 +85,7 @@ function AddPost() {
 
 return (
     <div>
-         <div className="neu card post-card" >
+         <div className="neu card add-post-card" >
                 <h2 style={{color: "#ed6663"}}>Create a post</h2>
                 <input required type="text" onChange={(e)=>setTitle(e.target.value)} placeholder="Title" maxLength = "30"/>
                 <input required type="text" onChange={(e)=>setTag(e.target.value)} placeholder="Tagline" maxLength = "90"/><br></br>
