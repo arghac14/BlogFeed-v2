@@ -77,7 +77,7 @@ function Feed() {
                       </div>
                         <div className="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                           <div className="views">
-                          <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp; {item.createdAt}
+                          <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp; {new Date(item.createdAt).toLocaleDateString()}
                             </div>
                           </div>
                         </div>

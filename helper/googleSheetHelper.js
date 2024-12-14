@@ -22,7 +22,7 @@ const entityRange = (entity, entityId = null) =>{
     switch(entity){
         case entities.USERS:
             firstCol = 'A';
-            lastCol = 'F'
+            lastCol = 'H'
             break;
         case entities.BLOGS:
             firstCol = 'A';
@@ -38,7 +38,7 @@ const entityRange = (entity, entityId = null) =>{
 
 const processPayload = (entity, requestData) => {
     const userModelFields = [
-        'Name', 'UserName', 'Password', 'ProfilePhoto', 'CreatedAt', 'UpdatedAt'
+        'Name', 'UserName', 'Password', 'ProfilePhoto', 'CreatedAt', 'UpdatedAt', 'IsGoogleAuth', 'GoogleAuthId'
     ];
     const blogModelFields = [
         'Title', 'Tag', 'Content', 'CoverPhoto', 'UserId', 'CreatedAt', 'UpdatedAt'

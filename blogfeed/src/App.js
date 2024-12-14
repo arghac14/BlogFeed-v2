@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Feed from './components/Feed';
-import Profile from './components/Profile';
 import NotFoundPage from './components/NotFoundPage';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
-import Post from './components/Post';
-import AddPost from './components/AddPost';
-import User from './components/User';
 import { createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css'
 import { Provider } from 'react-redux';
 import store from '../src/store';
 import GuardedRoute from './GlobalRouterGuard'; 
+
+
+const Profile = React.lazy(() => import('./components/Profile'));
+const Feed = React.lazy(() => import('./components/Feed'));
+const User = React.lazy(() => import('./components/User'));
+const AddPost = React.lazy(() => import('./components/AddPost'));
+const Post = React.lazy(() => import('./components/Post'));
+
 
 const App = () => {
   return (
@@ -22,7 +25,9 @@ const App = () => {
       <Provider store={store}>
         <Navbar/>
           <div className='app-body'>
-            <Outlet />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Outlet />
+            </Suspense>
           </div>
         <Footer/>
       </Provider>

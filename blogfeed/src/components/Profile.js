@@ -31,7 +31,7 @@ function Profile() {
       }}>
             <img 
               className="neu" style={{width:"145px",height:"145px",borderRadius:"50%"}}
-              src = {require("../assets/logo3.PNG")}/>
+              src={currentUser.profilePhoto ? currentUser.profilePhoto : require("../assets/logo3.PNG")}/>
         <div className="profile-name">
           { currentUser?.name }
         </div>
@@ -41,8 +41,11 @@ function Profile() {
       <div className="profile-feed" >
         <div className="container">
           <div className="row">
-          {   
-              blogs.map(item=>{
+          { blogs.length === 0 ? (
+    <div className="post-card">
+      <h4>No items found!</h4>
+    </div>
+  ) : blogs.map(item=>{
                 return (        
                   <div className="post-card" key={item.id} style={{backgroundColor:"#ffd5cd"}}>
 

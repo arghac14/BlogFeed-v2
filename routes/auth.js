@@ -14,7 +14,7 @@ const getAllUsers = async () => {
     const formattedData = rows.map((row, index) => {
         if (index < 2) return null;
         const rowNumber = index + 1;
-        const [name, userName, password, profilePhoto, createdAt, updatedAt] = row;
+        const [name, userName, password, profilePhoto, createdAt, updatedAt, isGoogleAuth, googleAuthId] = row;
         return {
             id: rowNumber,
             name,
@@ -22,7 +22,9 @@ const getAllUsers = async () => {
             password,
             profilePhoto,
             createdAt,
-            updatedAt
+            updatedAt,
+            isGoogleAuth,
+            googleAuthId
         };
     }).filter(Boolean);
     return formattedData;
@@ -42,7 +44,6 @@ router.post('/signup', async (req, res) => {
         var users = await getAllUsers();
 
         var user = users.find(u => u.userName == userName);
-        console.log(user)
 
         if (user) {
             return res.status(400).json({ message: 'User with given username already exists!' });
@@ -68,15 +69,52 @@ router.post('/signup', async (req, res) => {
 
 // Login Route
 router.post('/login', async (req, res) => {
-    const { userName, password } = req.body;
+    const { name, userName, password, profilePhoto, isGoogleAuth, googleAuthId } = req.body;
 
-    if (!userName || !password) {
+    if (!userName || (!isGoogleAuth && !password)) {
         return res.status(400).json({ message: 'Username or password is invalid!' });
     }
 
     try {
         // fetching user from db
         var users = await getAllUsers();
+        
+        if(isGoogleAuth){
+            var user = users.find(u => u.googleAuthId == googleAuthId);
+            if (user) {
+                const accessToken = jwt.sign({ sub: user.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.JWT_SECRET, {
+                    expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN,
+                });
+        
+                const refershToken = jwt.sign({ sub: user.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.REFRESH_TOKEN_SECRET, {
+                    expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN,
+                });
+                user.accessToken = accessToken;
+                user.refershToken = refershToken;
+                return res.status(200).json(user);
+            }
+            else{
+                var userRequestData = {
+                    name,
+                    userName,
+                    password,
+                    profilePhoto,
+                    isGoogleAuth,
+                    googleAuthId
+                }            
+                const data = await GoogleSheetHelper.post(entities.USERS, userRequestData);
+                const accessToken = jwt.sign({ sub: userRequestData.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.JWT_SECRET, {
+                    expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN,
+                });
+        
+                const refershToken = jwt.sign({ sub: userRequestData.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.REFRESH_TOKEN_SECRET, {
+                    expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN,
+                });
+                userRequestData.accessToken = accessToken;
+                userRequestData.refershToken = refershToken;
+                return res.status(200).json(userRequestData);
+            }
+        }
 
         var user = users.find(u => u.userName == userName);
 

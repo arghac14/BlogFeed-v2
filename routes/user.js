@@ -64,11 +64,14 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     // Add logic for creating a profile
     try {
-        const { name, userName, password } = req.body;
+        const { name, userName, password, profilePhoto, isGoogleAuth, googleAuthId } = req.body;
         var userRequestData = {
             name,
             userName,
-            password
+            password,
+            profilePhoto,
+            isGoogleAuth,
+            googleAuthId
         }
         const data = await GoogleSheetHelper.post(entities.USERS, userRequestData);
         res.send(data);

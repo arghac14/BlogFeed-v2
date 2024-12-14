@@ -7,15 +7,17 @@ import'bootstrap/dist/js/bootstrap.bundle.min';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
+import { GoogleOAuthProvider } from "@react-oauth/google"
 import { RouterProvider } from 'react-router-dom';
 import { appRoutes } from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RouterProvider router={appRoutes}>
-      <App />
-    </RouterProvider>
+    <GoogleOAuthProvider clientId='801637736042-46ads4gait8bpd3l5jcdicvglf12aoa5.apps.googleusercontent.com'>
+      <RouterProvider router={appRoutes}>
+        <App />
+      </RouterProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

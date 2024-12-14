@@ -354,3 +354,8 @@ card-img {
   margin: 10px;
   font-size: 25px;
 }
+
+.google-auth{ 
+  display: flex;
+  justify-content: center; 
+}
