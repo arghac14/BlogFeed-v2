@@ -86,11 +86,11 @@ router.post('/login', async (req, res) => {
                     expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN,
                 });
         
-                const refershToken = jwt.sign({ sub: user.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.REFRESH_TOKEN_SECRET, {
+                const refreshToken = jwt.sign({ sub: user.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.REFRESH_TOKEN_SECRET, {
                     expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN,
                 });
                 user.accessToken = accessToken;
-                user.refershToken = refershToken;
+                user.refreshToken = refreshToken;
                 return res.status(200).json(user);
             }
             else{
@@ -107,11 +107,11 @@ router.post('/login', async (req, res) => {
                     expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN,
                 });
         
-                const refershToken = jwt.sign({ sub: userRequestData.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.REFRESH_TOKEN_SECRET, {
+                const refreshToken = jwt.sign({ sub: userRequestData.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.REFRESH_TOKEN_SECRET, {
                     expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN,
                 });
                 userRequestData.accessToken = accessToken;
-                userRequestData.refershToken = refershToken;
+                userRequestData.refreshToken = refreshToken;
                 return res.status(200).json(userRequestData);
             }
         }
