@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { stringify } from 'qs';
 import {useNavigate} from 'react-router-dom';
-
 import M from 'materialize-css';
 
 // Create an axios instance with default configurations
@@ -12,13 +11,45 @@ const axiosInstance = axios.create({
   }
 });
 
+// Function to base64 decode a string
+const base64UrlDecode = (base64Url) => {
+  // Replace URL-safe characters with standard base64 encoding characters
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const decoded = atob(base64);
+  return decoded;
+};
+
+// Function to parse the JWT and extract the payload
+const parseJWT = (token) => {
+  const [header, payload, signature] = token.split('.');
+
+  // Decode the payload (Base64Url decoded)
+  const decodedPayload = base64UrlDecode(payload);
+  return JSON.parse(decodedPayload);
+};
+
 // Add a request interceptor to include the authorization token
 axiosInstance.interceptors.request.use(
-  function (config) {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+  async (config) => {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (accessToken) {
+      var token = parseJWT(accessToken);
+      // const { exp } = jwtDecode(accessToken, { header: true });
+
+      // If access token is expired, refresh it
+      if (Date.now() >= token.exp * 1000) {
+          const response = await axios.post('/api/refresh', { refreshToken });
+          const newAccessToken = response.data.accessToken;
+
+          localStorage.setItem('accessToken', newAccessToken);
+          config.headers.Authorization = `Bearer ${newAccessToken}`;
+      } else {
+          config.headers.Authorization = `Bearer ${accessToken}`;
+      }
     }
+
     return config;
   },
   function (error) {

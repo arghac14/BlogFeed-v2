@@ -20,6 +20,7 @@ function Signup() {
         var res = await signup(singupRequestData);
         if(res.id){
             localStorage.setItem('accessToken', res.accessToken);
+            localStorage.setItem('refreshToken', res.refreshToken);
             navigate("/");
         }
     }

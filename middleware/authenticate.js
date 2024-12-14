@@ -11,11 +11,14 @@ function authenticateToken(req, res, next) {
 
     try {
         // Verify token using JWT_SECRET
-        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+         jwt.verify(token, process.env.JWT_SECRET, (err, tokenData) => {
             if (err) {
                 return res.status(403).json({ message: 'Invalid Token' });
             }
-            req.user = user; // Attach user info to request
+            if(tokenData.tv !== process.env.TOKEN_VERSION || tokenData.aid !== process.env.APP_ID){
+                return res.status(403).json({ message: 'Invalid Token' });
+            }
+            req.tokenData = tokenData; // Attach user info to request
             next(); // Continue to the next middleware or route handler
         });
     } catch (error) {

@@ -22,6 +22,7 @@ function Signin() {
         
         if(res.user){
             localStorage.setItem('accessToken', res.accessToken);
+            localStorage.setItem('refreshToken', res.refreshToken);
             localStorage.setItem('user', JSON.stringify(res.user));
             console.log(res)
             dispatch(setUser(res.user));

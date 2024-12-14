@@ -91,15 +91,38 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid password!' });
         }
 
-        // Generate a JWT token
-        const token = jwt.sign({ username: user.userName }, process.env.JWT_SECRET, {
-            expiresIn: '1h',
+        // Generate a JWT access token
+        const accessToken = jwt.sign({ sub: user.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.JWT_SECRET, {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN,
         });
-        console.log(user)
-        res.status(200).json({ user: user, message: 'Login successful', accessToken: token });
+
+        const refershToken = jwt.sign({ sub: user.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.REFRESH_TOKEN_SECRET, {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN,
+        });
+
+        res.status(200).json({ user: user, message: 'Login successful', accessToken: accessToken, refreshToken: refershToken });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Error logging in', error });
+    }
+});
+
+router.post('/refresh', (req, res) => {
+    const { refreshToken } = req.body;
+    if (!refreshToken) return res.status(400).json({ error: 'Refresh token required' });
+
+    try {
+        // Verify refresh token
+        const payload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+        // Generate new access token
+        const accessToken = jwt.sign({ sub: user.userName, aid: process.env.APP_ID, tv: process.env.TOKEN_VERSION }, process.env.JWT_SECRET, {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN,
+        });
+
+        res.json({ accessToken: accessToken });
+    } catch (err) {
+        res.status(403).json({ error: 'Invalid or expired refresh token' });
     }
 });
 

@@ -33,7 +33,7 @@ function Profile() {
               className="neu" style={{width:"145px",height:"145px",borderRadius:"50%"}}
               src = {require("../assets/logo3.PNG")}/>
         <div className="profile-name">
-          { currentUser.name }
+          { currentUser?.name }
         </div>
       </div>
       <h2 className="center" style={{marginBottom:"15px"}}>My Posts:</h2>
@@ -60,10 +60,6 @@ function Profile() {
                           <Link to={'/post/'+item.id}><a href = {'/post/'+item.id} style={{backgroundColor: "#ed6663", color: "whitesmoke", border: "none"}} class="btn-neu btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; See full story</a></Link>
                             
                           </small>
-                        <br></br>
-                          {/* {(item.author._id === state._id)
-                          && <a style={{backgroundColor: "#ed6663", color: "whitesmoke", border: "none"}} class="btn-neu btn btn-danger" onClick={()=>deletePost(item._id)}><i class="fa fa-trash" aria-hidden="true"></i> delete</a>                  
-                          }   */}
                         </div>
                           <div className="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                             <div className="views">

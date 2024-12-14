@@ -6,22 +6,25 @@ import { setUser } from './store/slices/userSlice'; // Adjust the path to your u
 
 // GuardedRoute Component
 const GuardedRoute = ({ needsAuth, children }) => {
-  const user = useSelector((state) => state.user.user);
+  var user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const location = useLocation(); 
+  
+  const storedUser = localStorage.getItem('user');
+  const accessToken = localStorage.getItem('accessToken');
+  const isAuthenticated = user || (storedUser && accessToken);
 
   useEffect(() => {
     // Check localStorage and sync Redux state if not already set
-    const storedUser = localStorage.getItem('user');
-    const accessToken = localStorage.getItem('accessToken');
     if (!user && storedUser && accessToken) {
       dispatch(setUser(JSON.parse(storedUser)));
     }
-  }, [location, user]);
+  }, [dispatch, location, user]);
 
   // Redirect if authentication is required but the user is not authenticated
-  if (needsAuth && !user) {
-    return <Navigate to="/" replace />;
+  
+  if (needsAuth && !isAuthenticated) {
+    return <Navigate to="/signin" replace />;
   }
 
   // Render child routes if all checks pass
