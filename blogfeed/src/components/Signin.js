@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {useNavigate, Link} from 'react-router-dom'
 import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 
@@ -14,6 +14,10 @@ function Signin() {
     const navigate = useNavigate()
 
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+        localStorage.clear()
+    }, [])
 
     const signInUser = async (e)=>{
         var signinRequestData = {
